@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUAir</title>
+<title>BUAir | Registration </title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
@@ -18,12 +18,13 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css'
 	rel='stylesheet' />
-<link rel="stylesheet" href="css/main-page.css?version=1">
+<link rel="stylesheet" href="css/app.css?version=1">
 
 
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body class="d-flex flex-column vh-100" style = 'background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+		url("https://source.unsplash.com/rf6ywHVkrlY");'>
 	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">BUAir</a>
@@ -37,6 +38,7 @@
 					<a class="nav-link" href="main_page.jsp">Home</a>
 				</div>
 				<div class="navbar-nav ml-auto">
+					<a class="nav-link" href="index3.jsp">Admin Login</a>
 					<a class="nav-link" href="signin.jsp">Sign In</a>
 				</div>
 			</div>
