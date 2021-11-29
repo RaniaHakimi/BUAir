@@ -35,10 +35,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" href="main_page.jsp">Home</a>
+					<a class="nav-link" href="home.jsp">Home</a>
 				</div>
 				<div class="navbar-nav ml-auto">
-					<a class="nav-link" href="index3.jsp">Admin Login</a>
+					<a class="nav-link" href="adminlogin.jsp">Admin Login</a>
 					<a class="nav-link" href="signup.jsp">Sign Up</a>
 				</div>
 			</div>
