@@ -66,10 +66,16 @@
 			<div class="card text-center">
 				<h1>Cancel Ticket</h1>
 				<form action="Cancel" method="post">
-					<label for="tid">Enter Ticket ID:</label> <input class="form-group"
-						id="tid" type="number" name="tid" placeholder="Ticket ID">
-					<input class="btn btn-outline-dark form-group" type="submit"
-						value="Cancel Ticket">
+					<div class="row mb-3 justify-content-center">
+						<div class="col-2">
+							<input class="form-select" id="tid" type="number" name="tid"
+								placeholder="Ticket ID">
+						</div>
+						<div class="col-2">
+							<input class="btn btn-outline-dark form-group" type="submit"
+								value="Cancel Ticket">
+						</div>
+					</div>
 				</form>
 				<div class="card p-3">
 					<div class="card-header center h2">My Bookings</div>
