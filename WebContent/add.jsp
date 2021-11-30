@@ -38,16 +38,22 @@
 		int seats = 0;
 		int j;
 		int random = (int) (Math.random() * 1000 + 1);
-		System.out.print(i);
 
 		if (i == 0) {
-			seats = Integer.parseInt(request.getParameter("num").toString());
-			int id = Integer.parseInt(request.getParameter("id").toString());
-			ses.setAttribute("id", id);
-			ses.setAttribute("seats", seats);
-			j = 0;
-			ses.setAttribute("j", j);
-			ses.setAttribute("random", random);
+			String num_seats = request.getParameter("num").toString();
+			String ticketID = request.getParameter("id").toString();
+			if (num_seats == "" || ticketID == "") {
+				out.print("<script>window.alert('Please fill in all fields');</script>");
+				out.print("<script>window.location.href='search_flight.jsp';</script>");
+			} else {
+				seats = Integer.parseInt(num_seats);
+				int id = Integer.parseInt(ticketID);
+				ses.setAttribute("id", id);
+				ses.setAttribute("seats", seats);
+				j = 0;
+				ses.setAttribute("j", j);
+				ses.setAttribute("random", random);
+			}
 		} else if (i > 0) {
 			seats = Integer.parseInt(ses.getAttribute("seats").toString());
 			i++;
