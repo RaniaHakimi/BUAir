@@ -105,7 +105,6 @@
 				var x=document.getElementById("repeat-pass").value;
 				var y=document.getElementById("pass").value;
 				var a;
-				<%System.out.print(3); %>
 				if(x!=y){
 					a="password not ok";
 					document.getElementById("pass-match").innerHTML="passwords do not match!";
