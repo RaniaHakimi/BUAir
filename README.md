@@ -10,10 +10,9 @@ Yash Bengali
 Junaid Qasim  
 
 ## Built With
-- * Java
-- * Bootstrap
-- * JSP
-- * JDBC
-- * Servlet
-- * MySQL
++ [Java](https://docs.oracle.com/en/java/)
 + [Bootstrap](https://getbootstrap.com/)
++ [JSP](https://www.wideskills.com/jsp/jsp-document)
++ [JDBC](https://download.oracle.com/otn_hosted_doc/jdeveloper/904preview/jdk14doc/docs/guide/jdbc/index.html)
++ [Servlet](https://tomcat.apache.org/tomcat-5.5-doc/servletapi/)
++ [MySQL](https://docs.oracle.com/cd/E17952_01/mysql-8.0-en/index.html)
