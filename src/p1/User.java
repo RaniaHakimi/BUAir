@@ -16,65 +16,33 @@ import java.util.Enumeration;
 
 public class User extends HttpServlet{
 	
-	//private String UserId;
-	//private String name;
-	//private String password;
-	//private String role="customer";
-	//private String dob;
-	//private String gender,email,address;
+	/*
+	 * User class handles the sign in for admin, sign in for user and sign up operations
+	 */
+	
+	// Variables to hold user attributes 
+	private String name;
+	private String userID;
+	private String pass;
+	private String gender;
+	private String emailaddress;
 	
 	
-	// function that connects to database and select the username and password
-	public boolean signin(String userid,String pass) {
-		
-		
-		String sql_statement="select * from flight.user where uname=? and password=?";
-    	String url="jdbc:mysql://localhost:3306/flight?useSSL=false";
-    	String root="root";
-    	String password="rootadmin";
-    	
-    	//UserId=userid;
-    	//password=pass;
-    	try {
-    		Class.forName("com.mysql.jdbc.Driver");
-    		
-    		// creating connection to database
-    		Connection connection =DriverManager.getConnection(url, root, password);
-    		
-    		PreparedStatement ps =connection.prepareStatement(sql_statement);
-    		
-    		
-    		ps.setString(1, userid);
-    		ps.setString(2, pass);
-    		
-    		
-    		ResultSet rs = ps.executeQuery();
-    		
-    		
-    	if(rs.next()) {
-    		return true;
-    	}
-    	}
-    	catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    	return false;
-	}
+	// setting the url for mysql server connection
+	String url="jdbc:mysql://localhost:3306/airline?useSSL=false";
+	// root username
+	String root="root";
+	// password to mysql connection
+	String password="rootadmin";
 	
 	
 	// sign un for admin only
 	public boolean signin(String userid,String pass,String role) {
 		
-		String sql1="select * from flight.admin where uname=? and password=?";
+		// Create select sql statement as string 
+		String sql_statement="select * from admin where uname=? and password=?";
 		
 		
-    	String url="jdbc:mysql://localhost:3306/flight?useSSL=false";
-    	
-    	String root="root";
-    	
-    	String password="rootadmin";
-    	
-    	
     	try {
     		Class.forName("com.mysql.jdbc.Driver");
     		
@@ -82,12 +50,17 @@ public class User extends HttpServlet{
     		// creating connection to database
     		Connection connection =DriverManager.getConnection(url, root, password);
     		
+    		// prepare sql statement
+    		PreparedStatement ps=connection.prepareStatement(sql_statement);
     		
-    		PreparedStatement ps=connection.prepareStatement(sql1);
-    		
+    		// set parameters in sql statement
     		ps.setString(1, userid);
     		ps.setString(2, pass);
+    		
+    		// execute update 
     		ResultSet rs=ps.executeQuery();
+    		
+    	// since it's a select sql statement the response will be in the form of data
     	if(rs.next()) {
     		return true;
     	}
@@ -101,12 +74,10 @@ public class User extends HttpServlet{
 	// sign un for admin only
 	public boolean signup(String name,String email,String uname,String pass) {
 		
-		
-		String sql_statement ="insert into flight.user(name,email,uname,password)"+"values(?,?,?,?)";
-    	//String sql1="select * from flight.user";
-    	String url="jdbc:mysql://localhost:3306/flight?useSSL=false";
-    	String root="root";
-    	String password="rootadmin";
+		// Create Insert sql statement as string 
+		String sql_statement ="insert into user(name,email,uname,password) values(?,?,?,?)";
+    	
+    	
     	try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
@@ -116,6 +87,7 @@ public class User extends HttpServlet{
 			// prepared statement
 			PreparedStatement ps = connection.prepareStatement(sql_statement);
 			
+			// set variables
 			ps.setString(1, name);
 			ps.setString(2, email);
 			ps.setString(3, uname);
@@ -136,6 +108,40 @@ public class User extends HttpServlet{
 		} 
 		return false;
 	}
+	
+	
+	// function that connects to database and select the username and password
+	public boolean signin(String userid,String pass) {
+			
+		// Create select sql statement as string 
+			String sql_statement="select * from user where uname=? and password=?";
+	    	
+	    	
+	    	try {
+	    		Class.forName("com.mysql.jdbc.Driver");
+	    		
+	    		// create connection to database
+	    		Connection connection =DriverManager.getConnection(url, root, password);
+	    		
+	    		PreparedStatement ps =connection.prepareStatement(sql_statement);
+	    		
+	    		// set parameters to the question marks
+	    		ps.setString(1, userid);
+	    		ps.setString(2, pass);
+	    		
+	    		
+	    		ResultSet rs = ps.executeQuery();
+	    		
+	    		// since it's a select sql statement the response will be in the form of data
+	    	if(rs.next()) {
+	    		return true;
+	    	}
+	    	}
+	    	catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	return false;
+		}
 	
 	// function to log out 
 	public boolean signout(HttpSession session) {
