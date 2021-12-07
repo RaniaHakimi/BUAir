@@ -28,37 +28,25 @@
 	style='background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://source.unsplash.com/ANAa-P_e2lE");'>
 	<%
 		response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
-
 		HttpSession ses = request.getSession();
-
 		int i = Integer.parseInt(ses.getAttribute("i").toString());
-
 		String clas = ses.getAttribute("class").toString();
-
 		int seats = 0;
 		int j;
 		int random = (int) (Math.random() * 1000 + 1);
-
+		System.out.print(i);
 		if (i == 0) {
-			String num_seats = request.getParameter("num").toString();
-			String ticketID = request.getParameter("id").toString();
-			if (num_seats == "" || ticketID == "") {
-				out.print("<script>window.alert('Please fill in all fields');</script>");
-				out.print("<script>window.location.href='search_flight.jsp';</script>");
-			} else {
-				seats = Integer.parseInt(num_seats);
-				int id = Integer.parseInt(ticketID);
-				ses.setAttribute("id", id);
-				ses.setAttribute("seats", seats);
-				j = 0;
-				ses.setAttribute("j", j);
-				ses.setAttribute("random", random);
-			}
+			seats = Integer.parseInt(request.getParameter("num").toString());
+			int id = Integer.parseInt(request.getParameter("id").toString());
+			ses.setAttribute("id", id);
+			ses.setAttribute("seats", seats);
+			j = 0;
+			ses.setAttribute("j", j);
+			ses.setAttribute("random", random);
 		} else if (i > 0) {
 			seats = Integer.parseInt(ses.getAttribute("seats").toString());
 			i++;
 			ses.setAttribute("i", i);
-
 		}
 		int prime = 1;
 		int nonprime = 0;
@@ -98,7 +86,7 @@
 				class="col-8 container d-flex justify-content-center align-items-center mt-2 mb-2">
 				<div class="card text-center p-3">
 					<div class="card-header center h2">Enter Primary Passenger</div>
-					<form action='Add1' method='post' id="one">
+					<form action='Passenger' method='post' id="one">
 						Name: <input class="form-select" type='text' name='pname' required>
 						Age: <input class="form-select" type='number' name='age' required>
 						Gender: <select class="form-select" name="gender" required>
@@ -122,8 +110,9 @@
 			%>
 
 			<%
-				j = Integer.parseInt(ses.getAttribute("j").toString());
+				
 				i = Integer.parseInt(ses.getAttribute("i").toString());
+			    j = Integer.parseInt(ses.getAttribute("j").toString());
 				if (j < seats - 1 && i > 1) {
 			%>
 			<div class="row">
@@ -132,9 +121,9 @@
 					<div class="card text-center p-3">
 						<div class="card-header center h2">
 							Enter Passenger
-							<%=j + 1%>
+							<%=j + 2%>
 						</div>
-						<form action='Add1' method='post' id="two">
+						<form action='Passenger' method='post' id="two">
 							Name: <input class="form-select" type='text' name='pname'
 								required> Age: <input class="form-select" type='number'
 								name='age' required> Gender: <select class="form-select"
