@@ -12,10 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Customer
+ * class Customer that implements Customer servlet
  */
 @WebServlet("/Customer")
+
 public class Customer extends User {
+	
+	// username and password from Customer
+	String username;
+	String password;
+	
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -33,12 +39,11 @@ public class Customer extends User {
     		if(process.equals("signup")) {
     			
     			
-    			
     			String name=request.getParameter("name").toString();
     			
     	    	String email=request.getParameter("email").toString();
     	    	
-    	    	String uname=request.getParameter("username").toString();
+    	    	String username=request.getParameter("username").toString();
     	    	
     	    	String pass=request.getParameter("pass").toString();
     	    	
@@ -55,8 +60,8 @@ public class Customer extends User {
 				
     	    	}
     	    	// if the signup function returned true, then it means that the account was successfully created
-    	    		if(user.signup(name,email,uname,pass)) {
-    					//System.out.print(x);
+    	    		if(user.signup(name,email,username,pass)) {
+    					
     					PrintWriter out=response.getWriter();
     					out.print("<script>window.alert('Account was created successfully');</script>");
     					out.print("<script>window.location.href='signin.jsp';</script>");
@@ -72,22 +77,23 @@ public class Customer extends User {
     		}
     		
     		// if the process is to sign in, we want to get the username and password and try to see if they match in the database
+    		
     		if(process.equals("signin")) {
-    			String uname=request.getParameter("username").toString();
+    			
+    			username=request.getParameter("username").toString();
     			
     			
-    			String password=request.getParameter("pass").toString();
+    			password=request.getParameter("pass").toString();
     			
     			
-    				if(user.signin(uname,password)) {
+    				if(user.signin(username,password)) {
     					
     	    			HttpSession session=request.getSession();
     	    			// setting the session to the username
-    	    			session.setAttribute("uname", uname);
-    	    			//session.setAttribute(pass, rs.getString(2));
-    	    			
-    	    			
-    	    			response.sendRedirect("index2.jsp");
+    	    			session.setAttribute("uname", username);
+    	    
+			
+    	    			response.sendRedirect("display_booking.jsp");
     	    			session.setMaxInactiveInterval(600);
     	    		}
     				// if we could not sign in 
@@ -107,7 +113,7 @@ public class Customer extends User {
     		if(process.equals("logout")) {
     			HttpSession session =request.getSession();
     			if(user.signout(session)) {
-    				response.sendRedirect("home_page.jsp");
+    				response.sendRedirect("home.jsp");
     			}
     		}
     		
@@ -115,10 +121,5 @@ public class Customer extends User {
     	}
     	
     	
-public String getName(HttpServletRequest request,HttpServletResponse response) throws IOException {
-	
-	HttpSession ses=request.getSession();
-	
-	return ses.getAttribute("uname").toString();
-	
-}}
+
+}
