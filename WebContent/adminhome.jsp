@@ -92,23 +92,21 @@
 
 									<%
 										// url connection to database
-										String url = "jdbc:mysql://localhost:3306/flight?useSSL=false";
+										String url = "jdbc:mysql://localhost:3306/airline?useSSL=false";
 										// username for connection to database
 										String root = "root";
 										// password for connection to database
-										String password = "admin123";
+										String password = "rootadmin";
 										Class.forName("com.mysql.jdbc.Driver");
 										java.sql.Connection connection = DriverManager.getConnection(url, root, password);
 										Statement st = connection.createStatement();
 										// change sql statement for the routes
-										String sql_statement = "select route.id,route.from1,route.to1 from flight.route ";
-
+										String sql_statement = "select route.id,route.from1,route.to1 from route ";
 										ResultSet result = st.executeQuery(sql_statement);
-
 										while (result.next()) {
 									%>
 									<option value=<%=result.getInt(1)%>>
-										<%=result.getString(2)%> -
+										<%=result.getString(2)%> ->
 										<%=result.getString(3)%>
 									</option>
 									<%
@@ -117,11 +115,11 @@
 								</select>
 							</div>
 							<div class="col">
-								<label for="start">Start Time (HH:MM:SS)</label> <input
+								<label for="start">Departure Time</label> <input
 									class="form-select" id="start" type="text" name="start">
 							</div>
 							<div class="col">
-								<label for="end">End Time (HH:MM:SS)</label> <input id="end"
+								<label for="end">Arrival Time</label> <input id="end"
 									class="form-select" type="text" name="end">
 							</div>
 						</div>
@@ -136,10 +134,8 @@
 										// create connection object
 										connection = DriverManager.getConnection(url, root, password);
 										st = connection.createStatement();
-										sql_statement = "select company.id,company.company from flight.company ";
-
+										sql_statement = "select company.id,company.company from company ";
 										result = st.executeQuery(sql_statement);
-
 										while (result.next()) {
 									%>
 									<option value=<%=result.getInt(1)%>>
@@ -373,7 +369,7 @@
 								// set new connection
 								connection = DriverManager.getConnection(url, root, password);
 								st = connection.createStatement();
-								sql_statement = "select airplane.id,company.company,route.from1,route.to1,airplane.start_time,airplane.dest_time from flight.airplane inner join flight.route on airplane.route_id=route.id inner join company on airplane.company_id=company.id";
+								sql_statement = "select flight.id,company.company,route.from1,route.to1,flight.start_time,flight.dest_time from flight inner join route on flight.route_id=route.id inner join company on flight.company_id=company.id";
 								result = st.executeQuery(sql_statement);
 								while (result.next()) {
 							%>
@@ -407,7 +403,7 @@
 								// create connection
 								connection = DriverManager.getConnection(url, root, password);
 								st = connection.createStatement();
-								sql_statement = "select user.id,user.name from flight.user";
+								sql_statement = "select user.id,user.name from user";
 								result = st.executeQuery(sql_statement);
 								while (result.next()) {
 							%>
