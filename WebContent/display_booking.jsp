@@ -75,58 +75,45 @@ if(ses.getAttribute("uname")==null){
 									+ "color:green;}" + "#two{" + "color:red;}" + "</style>" + "</head>" + "</html>");
 						%>
 						<%
-							String url = "jdbc:mysql://localhost:3306/flight?useSSL=false";
+							String url = "jdbc:mysql://localhost:3306/airline?useSSL=false";
 							String root = "root";
-							String password = "admin123";
+							String password = "rootadmin";
 							try {
-
 								// either sql statement has issue 
-								String sql = "select *, company.company , passanger.name from ticket inner join company on ticket.company=company.id inner join user on user.uname=ticket.uname inner join passanger on passanger.random=ticket.random where user.uname=? and passanger.prime=?";
-
+								String sql = "select *, company.company , passenger.name from ticket inner join company on ticket.company=company.id inner join user on user.uname=ticket.uname inner join passenger on passenger.random=ticket.random where user.uname=? and passenger.prime=?";
 								//String sql="select * from ticket inner join user on user.uname=ticket.uname where user.uname=? and passanger.prime=?";
-
 								Class.forName("com.mysql.jdbc.Driver");
 								java.sql.Connection con = DriverManager.getConnection(url, root, password);
 								PreparedStatement st = con.prepareStatement(sql);
 								String name = ses.getAttribute("uname").toString();
-
 								st.setString(1, name);
-
 								st.setInt(2, 1);
-
 								ResultSet rs = st.executeQuery();
-
-
-								int i = 0;
+								
+							   boolean flag = false;
+								
 								while (rs.next()) {
-
-
-									if (i == 0) {
+									
+									if (!flag) {
 										out.print("<table class='table table-hover' align='center'>" + "<tr>" + "<th>Ticket ID</th>"
 												+ "<th>Name</th>" + "<th>From</th>" + "<th>Destination</th>"
 												+ "<th>Company</th>" + "<th>Class</th>"
-												+ "<th>Date (YYYY/MM/DD)</th>" + "<th>Departure Time</th>"
+												+ "<th>Date</th>" + "<th>Departure Time</th>"
 												+ "<th>Arrival Time</th>" + "<th>Seats Booked</th>"+ "</tr>"
-
 										);
-
-										i = 1;
+										flag = true;
 									}
-
 									out.print("<tr>" + "<td>" + rs.getInt(12) + "</td>" + "<td>" + rs.getString(21) + "</td>" + "<td>"
 											+ rs.getString(2) + "</td>" + "<td>" + rs.getString(3) + "</td>" + "<td>" + rs.getString(14)
 											+ "</td>" + "<td>" + rs.getString(24).substring(0,1).toUpperCase() + rs.getString(24).substring(1) + "</td>"
-
 											+ "<td>" + rs.getString(9) + "</td>" + "<td>" + rs.getString(4) + "</td>" + "<td>"
 											+ rs.getString(5) + "</td>" + "<td>" + rs.getString(10) + "</td>" + "</tr>");
-
 								}
-								if (i == 0) {
+								if (!flag) {
 									out.print("You have no booked flights");
 									out.print("<a class = 'text-muted' href='search_flight.jsp'>Book Now!</a>");
 								}
 								out.print("</table>");
-
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
