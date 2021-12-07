@@ -78,13 +78,13 @@
 									<option value="Boston">Boston</option>
 
 									<%
-										String url = "jdbc:mysql://localhost:3306/flight?useSSL=false";
+										String url = "jdbc:mysql://localhost:3306/airline?useSSL=false";
 										String root = "root";
-										String password = "admin123";
+										String password = "rootadmin";
 										Class.forName("com.mysql.jdbc.Driver");
 										java.sql.Connection connection = DriverManager.getConnection(url, root, password);
 										Statement st = connection.createStatement();
-										String sql_statement = "select international.place from flight.international where international=1";
+										String sql_statement = "select destination.place from destination where domestic=1";
 										ResultSet result = st.executeQuery(sql_statement);
 										while (result.next()) {
 									%>
@@ -101,6 +101,8 @@
 										Class.forName("com.mysql.jdbc.Driver");
 										connection = DriverManager.getConnection(url, root, password);
 										st = connection.createStatement();
+										
+										sql_statement = "select destination.place from destination where international=1";
 										result = st.executeQuery(sql_statement);
 										while (result.next()) {
 									%>
