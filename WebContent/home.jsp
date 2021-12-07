@@ -21,7 +21,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                     <a class="nav-link" href="search_flight.jsp">Book Tickets</a>
                     <a class="nav-link" href="cancel.jsp">Cancel Ticket</a>
-                    <a class="nav-link" href="display_booking.jsp">My Bookings</a>
+                    <a class="nav-link" href="index2.jsp">My Bookings</a>
                     <a class="nav-link" href="adminlogin.jsp">Admin Login</a>
                 </nav>
             </div>
